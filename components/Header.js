@@ -14,6 +14,7 @@ export default function Header() {
   const [date, setDate] = useState([
     { startDate: new Date(), endDate: new Date(), key: "selection" },
   ]);
+  const [openDate,setOpenDate] = useState(false);
 console.log(date);
   return (
     <>
@@ -58,18 +59,18 @@ console.log(date);
         <div className="flex bg-white h-12 justify-around border-2 border-yellow-500 rounded-md">
           <div className="flex p-1 space-x-2 items-center">
             <Search className="text-yellow-500" />
-            <input type="text" placeholder="Where are you going" />
+            <input className="h-full outline-none pl-2" type="text" placeholder="Where are you going" />
           </div>
-          <div className="relative flex p-1 space-x-2 items-center">
-            <CalendarTodayIcon className="text-yellow-500" />
-            <span>{`${format(date[0].startDate,"MM-dd-yyyy")}  upto  ${format(date[0].endDate,"MM-dd-yyyy")}`}  </span>
-            <DateRange
+          <div className="cursor-pointer relative flex p-1 space-x-2 items-center">
+            <CalendarTodayIcon  onClick={()=>{setOpenDate(prev=>!prev)}} className="text-yellow-500" />
+            <span  onClick={()=>{setOpenDate(prev=>!prev)}} className="flex text-center">{`${format(date[0].startDate,"MM-dd-yyyy")}`} <h1 className="ml-4 mr-4 font-semibold">to</h1>{`${format(date[0].endDate,"MM-dd-yyyy")}`}  </span>
+            {openDate? <DateRange
               editableDateInputs={true}
-              onChange={(value) => setDate(value.selection)}
+              onChange={(value) => setDate([value.selection])}
               moveRangeOnFirstSelection={false}
               ranges={date}
               className="absolute top-11 "
-            />
+            />:""}
           </div>
           <div className="flex p-1 space-x-2 items-center">
             <Person className="text-yellow-500" />
