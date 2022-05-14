@@ -6,7 +6,7 @@ export default function Navbar() {
     <nav className='flex flex-col h-fit w-screen'>
     <div className='flex justify-between px-8 bg-blue-800'>
         <div className='p-2'>
-            <h1 className='text-white text-2xl text-center'>BOOK IT!</h1>
+            <h1 className='text-white text-2xl text-center'>BOOKER!</h1>
         {/* <Image/> */}
         </div>
 

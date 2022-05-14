@@ -63,7 +63,7 @@ console.log(date);
           </div>
           <div className="cursor-pointer relative flex p-1 space-x-2 items-center">
             <CalendarTodayIcon  onClick={()=>{setOpenDate(prev=>!prev)}} className="text-yellow-500" />
-            <span  onClick={()=>{setOpenDate(prev=>!prev)}} className="flex text-center">{`${format(date[0].startDate,"MM-dd-yyyy")}`} <h1 className="ml-4 mr-4 font-semibold">to</h1>{`${format(date[0].endDate,"MM-dd-yyyy")}`}  </span>
+            <span  onClick={()=>{setOpenDate(prev=>!prev)}} className="flex text-center text-xs">{`${format(date[0].startDate,"MM-dd-yyyy")}`} <h1 className="ml-4 mr-4 font-semibold">to</h1>{`${format(date[0].endDate,"MM-dd-yyyy")}`}  </span>
             {openDate? <DateRange
               editableDateInputs={true}
               onChange={(value) => setDate([value.selection])}
