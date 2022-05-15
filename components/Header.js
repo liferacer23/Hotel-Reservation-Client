@@ -89,7 +89,7 @@ export default function Header({type}) {
               placeholder="Where are you going?"
             />
           </div>
-          <div className="z-index-50 cursor-pointer relative flex p-1 space-x-2 items-center">
+          <div className=" cursor-pointer relative flex p-1 space-x-2 items-center">
             <CalendarTodayIcon
               onClick={() => {
                 setOpenDate((prev) => !prev);
@@ -112,7 +112,7 @@ export default function Header({type}) {
                 onChange={(value) => setDate([value.selection])}
                 moveRangeOnFirstSelection={false}
                 ranges={date}
-                className="absolute top-11"
+                className="z-50 absolute top-11"
               />
             ) : (
               ""
@@ -123,7 +123,7 @@ export default function Header({type}) {
             <span onClick={()=>{setOpenOptions(prev=>!prev)}} className="text-xs w-[13rem] text-center cursor-pointer">
               {`${options.adults} · Adults ${options.children} · Children ${options.room} · Room`}{" "}
             </span>
-            {openOptions? <div className="z-index-50 bg-white absolute text-xs flex flex-col justify-between rounded-xl p-2 top-[10rem] border-2 border-gray-200 text-gray-800 w-[12rem] h-[8rem]">
+            {openOptions? <div className="z-50 bg-white absolute text-xs flex flex-col justify-between rounded-xl p-2 top-[10rem] border-2 border-gray-200 text-gray-800 w-[12rem] h-[8rem]">
               <div className="flex items-center justify-between">
                 <span>Adult</span>
                 <div className="w-[5rem] flex items-center justify-between">
