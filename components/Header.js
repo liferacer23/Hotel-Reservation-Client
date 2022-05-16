@@ -66,7 +66,7 @@ export default function Header({type}) {
           </button>
         </div>
       </div>
-      {type==="home" ? <div  className="px-9 flex flex-col h-[12rem] relative flex bg-[url('/assets/wave4.svg')] bg-cover">
+      {type==="home" ? <div  className="px-9 flex flex-col sm:h-[12rem] lg:h-[13rem] 2xl:h-[15rem] 3xl:h-[16rem] relative flex bg-[url('/assets/wave4.svg')] bg-cover">
       <> <h1 className="text-white text-xl font-medium">
           A lifetime of discounts? Its Genius.
         </h1>
