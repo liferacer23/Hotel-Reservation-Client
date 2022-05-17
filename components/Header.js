@@ -12,6 +12,8 @@ import { DateRange } from "react-date-range";
 import { format } from "date-fns";
 import {motion} from 'framer-motion'
 import { duration } from "@mui/material";
+import { useRouter } from "next/router";
+import Link from "next/link";
 export default function Header({type}) {
   const sub = "sub";
   const add = "add";
@@ -19,12 +21,27 @@ export default function Header({type}) {
     { startDate: new Date(), endDate: new Date(), key: "selection" },
   ]);
   const [openDate, setOpenDate] = useState(false);
+  const [destination, setDestination] = useState("");
   const [openOptions, setOpenOptions] = useState(false);
+
   const [options, setOptions] = useState({
     adults: 0,
     children: 0,
     room: 0,
   });
+
+  let data = {
+    startDate:format(date[0].startDate, "MM-dd-yyyy"),
+    endDate:format(date[0].endDate, "MM-dd-yyyy"),
+    destination:destination,
+    adults:options.adults,
+    children:options.children,
+    room:options.room,
+  };
+
+
+
+
   const cusomerHandler = (name, operation) => {
     setOptions((prev) => {
       return {
@@ -40,6 +57,13 @@ export default function Header({type}) {
 
     });
   };
+
+  //console.log(data);
+
+/*   const handleSearch=()=>{
+        route.push('/lists',{state:{destination,date,options}})
+  
+  } */
   return (
     <>
       <div className="relative flex flex-col w-screen bg-blue-800 text-white">
@@ -87,18 +111,21 @@ export default function Header({type}) {
               className="text-sm h-full outline-none pl-2"
               type="text"
               placeholder="Where are you going?"
+              onChange={(e)=>{setDestination(e.target.value)}}
             />
           </div>
           <div className=" cursor-pointer relative flex p-1 space-x-2 items-center">
             <CalendarTodayIcon
               onClick={() => {
                 setOpenDate((prev) => !prev);
+                setOpenOptions(false)
               }}
               className="text-yellow-500"
-            />
+            /> 
             <span
               onClick={() => {
                 setOpenDate((prev) => !prev);
+                setOpenOptions(false)
               }}
               className="flex text-center text-xs"
             >
@@ -113,14 +140,15 @@ export default function Header({type}) {
                 moveRangeOnFirstSelection={false}
                 ranges={date}
                 className="z-50 absolute top-11"
+                minDate={new Date()}
               />
             ) : (
               ""
             )}
           </div>
           <div className="realtive flex p-1 space-x-2 items-center">
-            <Person onClick={()=>{setOpenOptions(prev=>!prev)}} className="cursor-pointer text-yellow-500" />
-            <span onClick={()=>{setOpenOptions(prev=>!prev)}} className="text-xs w-[13rem] text-center cursor-pointer">
+            <Person onClick={()=>{setOpenOptions(prev=>!prev);setOpenDate(false);}} className="cursor-pointer text-yellow-500" />
+            <span onClick={()=>{setOpenOptions(prev=>!prev);setOpenDate(false);}} className="text-xs w-[13rem] text-center cursor-pointer">
               {`${options.adults} · Adults ${options.children} · Children ${options.room} · Room`}{" "}
             </span>
             {openOptions? <div className="z-50 bg-white absolute text-xs flex flex-col justify-between rounded-xl p-2 top-[10rem] border-2 border-gray-200 text-gray-800 w-[12rem] h-[8rem]">
@@ -201,9 +229,14 @@ export default function Header({type}) {
             </div>:""}
           </div>
           <div className="flex p-1 space-x-2 items-center">
-            <button className="rounded-xl w-20 h-8 text-sm bg-blue-800 text-white">
+           <Link as ="/lists" href={{
+             pathname: "/lists",
+             query:data
+           }}>
+            <button  className="rounded-xl w-20 h-8 text-sm bg-blue-800 text-white">
               Search
             </button>
+            </Link>
           </div>
         </motion.div>
         </>
