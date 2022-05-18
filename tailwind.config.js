@@ -28,6 +28,9 @@ module.exports = {
       },
     },
     extend: {
+      blur: {
+        xs: '2px',
+      },
       height: {
         100: "25rem",
       },
