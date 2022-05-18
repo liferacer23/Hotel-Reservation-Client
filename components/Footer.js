@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Footer() {
   return (
-    <div className='p-2'>
+    <div className='p-2 h-fit mt-[1rem]'>
       <div className='mx-12 flex gap-5 justify-between'>
       <div>
         <ul>
