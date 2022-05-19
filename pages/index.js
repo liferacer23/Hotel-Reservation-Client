@@ -32,7 +32,6 @@ export default function Home() {
         Homes guests love
       </h1>
       <HomeGuest />
-      <MailList />
     </motion.div>
   );
 }
