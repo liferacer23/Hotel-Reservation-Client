@@ -33,7 +33,7 @@ export default function SingleHotel() {
           <div className="w-[80%] flex flex-col space-y-1">
             <h1 className="text-xx font-semibold">Tower Street Apartments</h1>
             <div className="flex items-center justify-start">
-              <LocationOnIcon className=" text-sm text-gray-500" />
+              <LocationOnIcon className=" text-xs text-gray-500" />
               <p className="text-xs">
                 {" "}
                 5 Baztowa,old town, 33-332 krakow, poland
