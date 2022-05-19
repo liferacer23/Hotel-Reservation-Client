@@ -8,6 +8,7 @@ export default function list() {
       <Head>
         <title>Hotel Reservation | List</title>
       </Head> 
+      <Header/>
      <Lists/>
     </div>
   );
