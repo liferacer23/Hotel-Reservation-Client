@@ -1,5 +1,5 @@
-import dbConnect from "../../../utils/mongo";
-import Hotels from "../../../models/hotels";
+import dbConnect from "../../../utils/mongo.js";
+import Hotels from "../../../Models/HotelsModel.js";
 
 export default async function handler(req, res) {
   dbConnect();

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const {Schema} = mongoose;
 
-const HotelSchema = new Schema({
+const HotelsSchema = new Schema({
 
     name:{
         type:String,
@@ -56,4 +56,4 @@ const HotelSchema = new Schema({
 
 })
 
-module.exports = mongoose.model("Hotel",HotelSchema); 
+module.exports = mongoose.model("Hotels",HotelsSchema); 
