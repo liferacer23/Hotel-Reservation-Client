@@ -111,14 +111,14 @@ export default function SingleHotel() {
             </div>
             <div className="p-2 flex flex-col w-[20%] bg-blue-200 rounded-xl space-y-2">
               <h1 className="text-xx font-bold">
-                Perfect for a {nights}-night stay!!
+                Perfect for a {nights?nights:1}-night stay!!
               </h1>
               <p className="text-xs">
                 Loacated in the real heart of krakow,this property has excellent
                 location
               </p>
               <h1 className="text-xl font-bold text-gray-500">
-                ${TotalPrice}
+                ${TotalPrice?TotalPrice:$}
                 <p className="text-xl inline font-medium">({nights}) nights</p>
               </h1>
               <button
