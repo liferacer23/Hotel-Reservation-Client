@@ -151,7 +151,7 @@ export default function Lists() {
           </form>
           <div className="w-4/6 border-2 h-fit border-gray-200">
             {fetching
-              ? "Loading":fetching==false && payload.length==0 ? "Nothing Found We Only Have Properties in Madrid, Berlin and Mekanisa currently :("
+              ? "Loading":fetching==false && payload.length==0 ? "   Nothing Found We Only Have Properties in madrid, berlin, dubai and london currently :("
               : payload.map((data, index) => {
                   return <SearchItem data={data} key={index} />;
                 })}

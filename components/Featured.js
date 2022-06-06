@@ -18,7 +18,7 @@ export default function Featured() {
           height={300}
         />
         <div className="p-2 absolute top-[12rem] text-white">
-          <h1 className="text-3xl font-semibold">Persia</h1>
+          <h1 className="text-3xl font-semibold">Berlin</h1>
           <p className="text-xs">{payload[0]} properties</p>
         </div>
       </div>
