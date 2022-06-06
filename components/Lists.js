@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
 import SearchItem from "./SearchItem";
+import useFetch from "../hook/useFetch";
 export default function Lists() {
   const router = useRouter();
   const query = router.query;
@@ -24,13 +25,18 @@ export default function Lists() {
   const [newDate, setNewDate] = useState([
     { startDate: new Date(), endDate: new Date(), key: "selection" },
   ]);
-
-  console.log(date);
+  const [min, setMin] = useState(null);
+  const [max, setMax] = useState(null);
+  const [searchCity, setSearchCity] = useState(null);
+  const { payload, error, fetching,refetchData } = useFetch(
+    `https://myhotelreservationsite.herokuapp.com/api/hotels?city=${searchCity?searchCity:destination}&min=${min || 1}&max=${max || 1000}`
+  );
+ 
   return (
     <div>
       <div className="p-2 mt-2 mb-10">
         <div className=" flex justify-evenly gap-4 mx-8">
-          <form className="sticky top-[1rem] flex flex-col overflow-x-hidden border-2 border-gray-300 w-[22rem] h-fit p-2 rounded-xl shadow-2xl overflow-auto">
+          <form onSubmit={(e)=>{refetchData();e.preventDefault();}} className="sticky top-[1rem] flex flex-col overflow-x-hidden border-2 border-gray-300 w-[22rem] h-fit p-2 rounded-xl shadow-2xl overflow-auto">
             <div className="flex justify-start w-full">
               <h1 className="text-sm text-gray-700">Search</h1>
             </div>
@@ -40,6 +46,7 @@ export default function Lists() {
               <input
                 className="h-7 pl-2 text-xs border-2 border-gray-300 outline-none"
                 placeholder={destination}
+                onChange={(e)=>{setSearchCity(e.target.value)}}
                 type="text"
               />
             </div>
@@ -85,6 +92,9 @@ export default function Lists() {
                 <div className="flex justify-between">
                   <h1 className="text-xs">Min Price(per night)</h1>
                   <input
+                    onChange={(e) => {
+                      setMin(e.target.value);
+                    }}
                     min={0}
                     className="text-xs text-gray-400 w-11 h-5 border-2 border-gray-300 outline-none"
                     type="Number"
@@ -93,6 +103,9 @@ export default function Lists() {
                 <div className="flex justify-between">
                   <h1 className="text-xs">Max Price(per night)</h1>
                   <input
+                    onChange={(e) => {
+                      setMax(e.target.value);
+                    }}
                     min={0}
                     className="text-xs text-gray-400 w-11 h-5 border-2 border-gray-300 outline-none"
                     type="Number"
@@ -137,12 +150,11 @@ export default function Lists() {
             </div>
           </form>
           <div className="w-4/6 border-2 h-fit border-gray-200">
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-       
+            {fetching
+              ? "Loading":fetching==false && payload.length==0 ? "Nothing Found :("
+              : payload.map((data, index) => {
+                  return <SearchItem data={data} key={index} />;
+                })}
           </div>
         </div>
       </div>

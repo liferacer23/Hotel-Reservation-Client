@@ -13,7 +13,7 @@ export default function ImageContainer({setOpenSlider, setSlideNumber,images}) {
       <div className="flex justify-center items-center p-2 flex mx-auto w-[95%] h-full flex-wrap gap-2">
         {images.map((image, index) => {
           return (
-            <div onClick={()=>{handleOpen(index)}} key={index} className="relative w-[16rem] h-[16rem]">
+            <div onClick={()=>{handleOpen(index)}} key={index} className="transition duration-700 ease-in-out z-10 hover:z-30 hover:scale-150 relative w-[16rem] h-[16rem]">
               <Image
                 src={image}
                 alt="propertyImage"

@@ -1,9 +1,14 @@
 import React from "react";
 import Image from "next/image";
 import {motion} from 'framer-motion';
+import useFetch from "../hook/useFetch";
 export default function Featured() {
+  const { payload, fetching, error, refetch } = useFetch(
+    "https://myhotelreservationsite.herokuapp.com/api/hotels/countByCity?cities=Berlin,london,mekanisa"
+  );
   return (
-    <div className="relative z-index-10 flex gap-5">
+    <>
+    {fetching? "Loading..":<div className="relative z-index-10 flex gap-5">
       <div className="relative flex flex-col">
         <Image
           className="z-0 rounded-xl"
@@ -14,7 +19,7 @@ export default function Featured() {
         />
         <div className="p-2 absolute top-[12rem] text-white">
           <h1 className="text-3xl font-semibold">Persia</h1>
-          <p className="text-xs">125 property</p>
+          <p className="text-xs">{payload[0]} properties</p>
         </div>
       </div>
       <div className="relative flex flex-col">
@@ -27,7 +32,7 @@ export default function Featured() {
         />
         <div className="p-2 absolute top-[12rem] text-white">
           <h1 className="text-3xl font-semibold">Dubai</h1>
-          <p className="text-xs">533 property</p>
+          <p className="text-xs">{payload[1]} properties</p>
         </div>
       </div>
       <div className="relative flex flex-col">
@@ -40,9 +45,10 @@ export default function Featured() {
         />
         <div className="p-2 absolute top-[12rem] text-white">
           <h1 className="text-3xl font-semibold">London</h1>
-          <p className="text-xs">254 property</p>
+          <p className="text-xs">{payload[2]} properties</p>
         </div>
       </div>
-    </div>
+    </div>}
+    </>
   );
 }
