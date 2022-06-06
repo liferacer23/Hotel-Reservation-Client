@@ -55,7 +55,7 @@ export default function Login() {
                 User Name:
               </label>
               <input
-                className="text-sm h-8 border-none outline-none"
+                className="pl-2 text-sm h-8 border-none outline-none"
                 type="text"
                 id="username"
                 onChange={(e) => {
@@ -69,13 +69,13 @@ export default function Login() {
                 Email:
               </label>
               <input
-                className="text-sm h-8 border-none outline-none"
+                className="pl-2 text-sm h-8 border-none outline-none"
                 type="email"
                 id="email"
                 onChange={(e) => {
                   handleChange(e);
                 }}
-                placeholder="User Name"
+                placeholder="Email"
               />
             </div>
             <div className="mx-auto flex justify-between items-center w-[90%] p-1">
@@ -83,7 +83,7 @@ export default function Login() {
                 Password:
               </label>
               <input
-                className="text-sm h-8 border-none outline-none"
+                className="pl-2 text-sm h-8 border-none outline-none"
                 type="password"
                 id="password"
                 placeholder="Password"
@@ -97,7 +97,7 @@ export default function Login() {
                 Confirm Password:
               </label>
               <input
-                className="text-sm h-8 border-none outline-none"
+                className="pl-2 text-sm h-8 border-none outline-none"
                 type="password"
                 id="confirmPassword"
                 placeholder="Password"

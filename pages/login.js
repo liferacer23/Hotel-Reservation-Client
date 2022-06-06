@@ -45,7 +45,7 @@ export default function Login() {
                 User Name:
               </label>
               <input
-                className="text-sm h-8 border-none outline-none"
+                className="pl-2 text-sm h-8 border-none outline-none"
                 type="text"
                 id="username"
                 onChange={(e) => {
@@ -59,7 +59,7 @@ export default function Login() {
                 Password:
               </label>
               <input
-                className="text-sm h-8 border-none outline-none"
+                className="pl-2 text-sm h-8 border-none outline-none"
                 type="password"
                 id="password"
                 placeholder="Password"
