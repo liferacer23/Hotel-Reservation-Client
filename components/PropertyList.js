@@ -55,7 +55,7 @@ export default function PropertyList() {
                         alt="property-1"
                       />
                     </div>
-                    <Link href="list">
+                    <Link href="/lists">
                       <div className="p-2 flex flex-col">
                         <h1 className="text-xl capitalize font-bold text-gray-600 hover:underline hover:cursor-pointer">
                         {payload[index]?.type}
