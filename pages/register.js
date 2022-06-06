@@ -1,17 +1,17 @@
-import React, { useContext, useState} from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
 import Link from "next/link";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 export default function Login() {
-    const route = useRouter();
+  const route = useRouter();
   const [userInfo, setUserInfo] = useState({
-      email:null,
+    email: null,
     username: null,
     password: null,
-    confirmPass:null
+    confirmPassword: null,
   });
   const { user, loading, error, dispatch } = useContext(AuthContext);
 
@@ -22,25 +22,33 @@ export default function Login() {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
+       if(userInfo.password!==userInfo.confirmPassword)
+       {
+        dispatch({ type: "LOGIN_FAILD", payload: "Passwords dont match" });
+       }
+       else{
       const response = await axios.post(
-        "https://myhotelreservationsite.herokuapp.com/api/auth/login",
-        userInfo
+        "https://myhotelreservationsite.herokuapp.com/api/auth/register",
+        {
+          email: userInfo.email,
+          username: userInfo.username,
+          password: userInfo.password,
+        }
       );
-      dispatch({ type: "LOGIN_SUCCESS", payload: response.data });  
-      route.push('/');
+      dispatch({ type: "LOGIN_SUCCESS", payload: response.data });
+      route.push("/");
+    }
     } catch (err) {
       dispatch({ type: "LOGIN_FAILD", payload: err.response.data });
     }
   };
 
-  
   return (
     <>
-    <Navbar/>
-    <div className="z-50 fixed inset-0 flex items-center justify-center">
-      <div className="z-20 backdrop-blur-xl flex justify-center items-center fixed inset-0 bg-gray-800 bg-opacity-50 overflow-y-auto h-full w-full">
-      </div>
-        <div className="absolute z-50 bg-blue-800 rounded-xl h-[15rem] w-[20rem] p-2 flex justify-center items-center">
+      <Navbar />
+      <div className="z-50 fixed inset-0 flex items-center justify-center">
+        <div className="z-20 backdrop-blur-xl flex justify-center items-center fixed inset-0 bg-gray-800 bg-opacity-50 overflow-y-auto h-full w-full"></div>
+        <div className="absolute z-50 bg-blue-800 rounded-xl h-[20rem] w-[25rem] p-2 flex justify-center items-center">
           <form className="rounded-xl bg-white w-full h-full flex flex-col justify-center space-y-2">
             <div className="mx-auto flex justify-between w-[90%] p-1 items-center">
               <label className="text-sm" htmlFor="username">
@@ -91,7 +99,7 @@ export default function Login() {
               <input
                 className="text-sm h-8 border-none outline-none"
                 type="password"
-                id="password"
+                id="confirmPassword"
                 placeholder="Password"
                 onChange={(e) => {
                   handleChange(e);
@@ -99,31 +107,32 @@ export default function Login() {
               />
             </div>
             <div className="flex justify-evenly">
-            <button
-            disabled={loading}
-              className="mx-auto hover:bg-blue-600 rounded-xl w-24 h-8 text-xs bg-blue-800 text-white"
-              type="submit"
-              onClick={(e) => {
-                handleLogin(e);
-              }}
-            >
-              {loading ? "Loading.." : "Login"}
-            </button>
-           <Link href="/">
-            <button
-            disabled={loading}
-              className="mx-auto hover:bg-blue-600 rounded-xl w-24 h-8 text-xs bg-gray-800 text-white"
-            >
-              Home
-            </button>
-            </Link>
+              <button
+                disabled={loading}
+                className="mx-auto hover:bg-blue-600 rounded-xl w-24 h-8 text-xs bg-blue-800 text-white"
+                type="submit"
+                onClick={(e) => {
+                  handleLogin(e);
+                }}
+              >
+                {loading ? "Loading.." : "Register"}
+              </button>
+              <Link href="/">
+                <button
+                  disabled={loading}
+                  className="mx-auto hover:bg-blue-600 rounded-xl w-24 h-8 text-xs bg-gray-800 text-white"
+                >
+                  Home
+                </button>
+              </Link>
             </div>
-            <p className="font-bold w-[80%] mx-auto text-xs text-red-500">{error ? <span>{error}</span> : " "}</p>
+            <p className="font-bold w-[80%] mx-auto text-xs text-red-500">
+              {error ? <span>{error}</span> : " "}
+            </p>
           </form>
         </div>
-      
-    </div>
-    <Footer/>
+      </div>
+      <Footer />
     </>
   );
 }
